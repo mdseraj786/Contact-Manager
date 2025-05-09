@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org"
+	th:replace="~{base::layout(~{::section})}">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login</title>
+</head>
+
+<body>
+	<section
+		class="banner d-flex justify-content-center align-items-center">
+		<div class="wrapper-login">
+			<form th:action="@{/login}" action="#" method="Post">
+				<h2>Login</h2>
+				<!-- For message print -->
+				<div class="alert" role="alert" th:if="${session.message}"
+					th:classappend="${session.message.type}">
+					<p th:text="${session.message.content}"></p>
+					<p th:block="${@sessionHelper.removeMessageFromSession()}"></p>
+				</div>
+
+				<div th:if="${param.error}" class="alert alert-danger">
+					Invalid Username and Password!</div>
+				<div th:if="${param.logout}" class="alert alert-success">You
+					hava been log-out.</div>
+				<div class="input-field">
+					<input id="username" name="username" type="text" required> <label>Enter
+						your username</label>
+				</div>
+				<div class="input-field">
+					<input name="password" id="password" type="password" required> <label>Enter
+						your password</label>
+				</div>
+				<div class="forget">
+					<label for="remember"> <input type="checkbox" id="remember">
+						<p>Remember me</p>
+					</label> <a href="#">Forgot password?</a>
+				</div>
+				<button type="submit">Log In</button>
+				<div class="register">
+					<p>
+						Don't have an account? <a href="/signup">Register</a>
+					</p>
+				</div>
+			</form>
+		</div>
+
+	</section>
+</body>
+
+</html>

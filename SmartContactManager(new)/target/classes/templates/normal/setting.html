@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org"
+	th:replace="~{normal/base::layout(~{::section})}">
+<!--  ~{base::layout(~{:: section})}-->
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>User Dashboard</title>
+</head>
+
+<body>
+	<section class=" text-center align-items-center">
+
+		<div class="mt-5 p-5  row">
+			<div class="col-md-12 ">
+
+				<!-- show this card when contact is present -->
+				<div class="card  opacity-75" th:if="${user}">
+					<div class="card-body">
+
+						<!-- For message print -->
+						<div class=" text-center alert mb-1 p-0 pt-2 " role="alert"
+							th:if="${session.message}"
+							th:classappend="${session.message.type}">
+							<!-- this is dynamic content -->
+							<p th:text="${session.message.content}"></p>
+							<p th:block="${@sessionHelper.removeMessageFromSession()}"></p>
+						</div>
+
+						<h1>Change Password</h1>
+
+						<form action="" th:action="@{/user/passwordChange}" method="post">
+							<input name="oldPassword" type="text" class="form-control m-2"
+								placeholder="Enter Old Password"> <input
+								name="newPassword" type="text" class="form-control m-2"
+								placeholder="Enter New Password">
+							<div class="container">
+								<button type="submit" class="btn btn-success m-2">Change
+								</button>
+								<button type="reset" class="btn btn-warning m-2">
+									Reset</button>
+							</div>
+						</form>
+
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</section>
+</body>
+
+</html>
