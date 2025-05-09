@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org"
+	th:replace="~{normal/base::layout(~{::section})}">
+<!--  ~{base::layout(~{:: section})}-->
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>User Dashboard</title>
+</head>
+
+<body>
+	<section class=" mt-3 p-5 text-center align-items-center">
+
+		<div class="row">
+			<div class="col-md-12 ">
+
+				<!-- show this card when contact is present -->
+				<div class="card  opacity-75" th:if="${contact}">
+					<div class="card-body">
+
+						<!-- For message print -->
+						<div class=" text-center alert mb-1 p-0 pt-2 " role="alert"
+							th:if="${session.message}"
+							th:classappend="${session.message.type}">
+							<!-- this is dynamic content -->
+							<p th:text="${session.message.content}"></p>
+							<p th:block="${@sessionHelper.removeMessageFromSession()}"></p>
+						</div>
+
+						<!-- <h1>Show specific contact</h1> -->
+						<img style="height: 200px; width: 200px;"
+							class="contact_profile_pic" alt="contactProfile" src=""
+							th:src="@{'/image/contact/'+${contact.imageUrl}}"> <span></span>
+
+						<h1>
+							<span
+								th:text="${contact.getName()} + ' (' + ${contact.getNickName()}+')'">(<span
+								th:text="${contact.getNickName()}"></span> )
+							</span>
+						</h1>
+						<table class="table">
+							<thead>
+								<tr>
+									<th scope="col"></th>
+									<th scope="col">#ID</th>
+									<th scope="col">SCMSPLK<span th:text="${contact.cId}"></span>
+									</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<th scope="row"></th>
+									<th scope="row">Email</th>
+									<td scope="row"><span th:text="${contact.email}"></span></td>
+								<tr>
+									<th scope="row"></th>
+									<th scope="row">Phone No.</th>
+									<td scope="row"><span th:text="${contact.phone}"></span></td>
+								</tr>
+								<tr>
+									<th scope="row"></th>
+									<th scope="row">Work</th>
+									<td scope="row"><span th:text="${contact.work}"></span></td>
+								</tr>
+							</tbody>
+						</table>
+
+						<div class="description">
+							<th:block th:text="${contact.description}"></th:block>
+						</div>
+
+						<div class="container text-center mt-3">
+							<a style="width:150px;" th:href="@{'/user/delete-contact/' + ${contact.cId}}"
+								class="btn btn-danger btn-block">Delete</a>
+							
+							<form class="mt-1 text-center align-items-center" action="#"
+											th:action="@{'/user/update-contact/' + ${contact.cId}}"
+											method="post">
+											<button style="width:150px;" type="submit" class="btn btn-success btn-block">Update</button>
+										</form>
+						</div>
+					</div>
+				</div>
+
+				<!-- 	this is for security purpose  -->
+				<div th:unless="${contact}">
+					<h1 class="bg-danger p-3 m-3">You don't have permission to see
+						this contact.......</h1>
+					<a class="btn btn-success" th:href="@{/user/show-contacts/0}">first
+						page</a>
+				</div>
+			</div>
+		</div>
+	</section>
+</body>
+
+</html>

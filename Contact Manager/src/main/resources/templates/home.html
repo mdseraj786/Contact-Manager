@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org" th:replace="~{base::layout(~{::section})}">
+<!--  ~{base::layout(~{:: section})}-->
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home page</title>
+</head>
+
+<body>
+    <section class="banner d-flex justify-content-center align-items-center">
+        <div class=" text-center">
+
+            <h1>Smart Contact Manager</h1>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea explicabo sint recusandae impedit. Sunt illo
+                modi nihil deserunt iste debitis,</p>
+            <a th:href="@{/user/index}" class="btn my-bg-primary text-white btn-lg">get started</a>
+        </div>
+
+    </section>
+</body>
+
+</html>
